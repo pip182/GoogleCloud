@@ -1,6 +1,8 @@
 @echo off
 
-set delay=2
+@REM Set the delay in seconds, 2 hours = 7200 seconds
+set delay=7200
+
 echo Delaying for %delay% seconds...
 timeout /T %delay% /NOBREAK
 

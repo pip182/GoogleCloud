@@ -10,10 +10,15 @@ from tqdm import tqdm  # For progress bar
 
 # Configuration
 current_directory = r"D:\DataDump"
-keywords = ['door', 'door-style', 'door shop', 'door procedure']
+keywords = ['door', 'door-style', 'door shop', 'door procedure', 'problem', 'issue',
+            'wrong', 'incorrect', 'mistake', 'error', 'fault', 'defect', 'flaw', 'bug',
+            'trouble', 'difficulty', 'complication', 'dilemma', 'predicament',
+            'quandary', 'plight', 'obstacle', 'hurdle', 'barrier', 'impediment', 'snag',
+            'hiccup', 'setback', 'disadvantage', 'weakness', 'shortcoming', 'deficiency',
+            'failing', 'imperfection', 'blemish']
 chunk_size_gb = 2  # Size of each chunk in GB
 failed_items_csv = os.path.join(current_directory, "failed_messages.csv")
-door_emails_file = os.path.join(current_directory, "emails_about_doors.xlsx")
+door_emails_file = os.path.join(current_directory, "emails_about_doors_and_issues.xlsx")
 
 # Spam filtering configuration
 spam_keywords = [
@@ -21,8 +26,9 @@ spam_keywords = [
     "marketing", "ad", "advertisement", "newsletter", "click here", "limited-time deal", "exclusive offer"
 ]  # Extend this list as needed
 
-blocked_senders = [
-    "noreply@homesteadcabinet.net"  # Add other blocked senders here
+ignored_senders = [
+    "noreply@homesteadcabinet.net",  # Add other ignored senders here
+    "mailer-daemon@googlemail.com",
 ]
 
 
@@ -346,7 +352,7 @@ if __name__ == '__main__':
         # Initialize the failed items CSV with a header
         with open(failed_items_csv, mode='w', newline='', encoding='utf-8') as f:
             csv_writer = csv.writer(f)
-            csv_writer.writerow(["From", "To", "Subject", "Date", "Body"])
+            csv_writer.writerow(["From", "Subject", "Date", "Body"])
 
         find_and_convert_mbox_files(current_directory)
     else:
